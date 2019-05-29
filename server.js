@@ -29,7 +29,7 @@ app.use(express.static("public"));
 // =============================================================
 // require("./routes/html_routes.js")(app);
 require("./routes/userApiRoute.js")(app);
-// require("./routes/companyRoute.js")(app);
+require("./routes/tasksRoute.js")(app);
 // require("./routes/machineRoute.js")(app);
 // require("./routes/orderRoute.js")(app);
 

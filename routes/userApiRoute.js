@@ -13,7 +13,7 @@ module.exports = function (app) {
             res.json(data)
         })
     })
-    // PUT route for updating passwords
+    
     app.put("/api/user", function (req, res) {
         db.User.update(
             req.body,
@@ -25,4 +25,16 @@ module.exports = function (app) {
                 res.json(dbPost);
             });
     });
+
+    app.get("/api/user/:id", function(req, res) {
+        db.User.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: [db.Tasks]
+        }).then(function(x) {
+            res.json(x)
+        })
+    })
+    
 };
