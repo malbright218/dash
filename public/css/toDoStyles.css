@@ -1,24 +1,29 @@
-#profImage {
-    height: 200px;
-    width: 200px;
+ul {
+    list-style: none;
 }
 
-.profileSubmitHidden {
-    background-color: #FEDC3D;
-    display: none;
+.taskIcon {
+    display: inline;
 }
 
-.profileSubmitVisible {
-    background-color: #FEDC3D;
+.task-title {
+    padding-top: 4px;
+}
+.task-checkbox {
+    padding-top: 6px;
+}
+.toDoRow {
+    margin-bottom: 4px;
+}
+.list-row {
+    
+    padding-bottom: 5px;
+    padding-top: 2px;
+    border-left: 3px solid #FEDC3D;
 }
 
-.profileEditHidden {
-    display: none;
-}
-
-.profileEditVisible {
-    font-family: 'Righteous', cursive;
-    color: #01ABAA;
+.toDoForm {
+    width: 100%;
 }
 
 
@@ -26,6 +31,13 @@
 
 
 
+
+/* //////////////////////////////////////////////// */
+/* //////////////////////////////////////////////// */
+/* //////////////////////////////////////////////// */
+/* //////////////////////////////////////////////// */
+/* //////////////////////////////////////////////// */
+/* //////////////////////////////////////////////// */
 
 body {
     background-color: #CDCDCD;

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Abel|Cabin|Poiret+One|Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/profileStyles.css">
+    <link rel="stylesheet" type="text/css" href="css/toDoStyles.css">
     <title>Inside the Box</title>
 </head>
 
@@ -67,7 +67,7 @@
                         <span class="menu-collapsed">Tables</span>
                     </a>
                 </div>
-                <a href="#submenu2" data-toggle="collapse" aria-expanded="false"
+                <a href="profile.html"
                     class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fas fa-user fa-fw mr-3"></span>
@@ -75,7 +75,7 @@
                     </div>
                 </a>
                 <!-- Submenu content -->
-                
+
                 <a href="todo.html" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fas fa-tasks fa-fw mr-3"></span>
@@ -115,52 +115,64 @@
 
         <!-- MAIN -->
         <div class="col">
-            <h2>Profile</h2>
-            <div class="row">
-                <div class="col-md-3">
-                    <span id="profImage">
-                        <!-- <img src="assets/profilePlaceholder.jpg"> -->
-                    </span>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Tasks</h3>
                 </div>
-                <div class="col-md-9">
+                <div class="card-body">
                     <form>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="firstNameInput" placeholder="First Name">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i style="color: #000000" class="fas fa-tasks"></i></span>
                             </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name">
-                            </div>
+                            <input type="text" class="form-control add-todo" placeholder="Add a task..." id="newTask">
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <input type="text" class="form-control" id="phoneInput" placeholder="(973)-345-2000">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <input type="text" class="form-control" id="extensionInput" placeholder="x2000">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="email" class="form-control" id="emailInput"
-                                    placeholder="example@accuratebox.com">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <h6 id="profileEdit" style="padding-left: 5px">EDIT</h6>
-                        </div>
-                        <button id="profileSubmit" class="btn">Submit</button>
-
                     </form>
+                    <ul id="toDoTarget">
+                        <!-- <li class="toDoRow">
+                            <div class="row list-row">
+                                <div class="col-md-10">
+                                    <div class="task-title">
+                                        <span class="task-title-sp"><input type="text" class="toDoForm" disabled></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="taskIcon">
+                                        <button class="btn btn-success btn-xs"><i style="color: #fff" class="fas fa-check"></i></button>
+                                        <button class="btn btn-primary btn-xs"><i style="color: #fff" class="fas fa-pencil-alt"></i></button>
+                                        <button class="btn btn-danger btn-xs"><i style="color: #fff" class="far fa-trash-alt "></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="toDoRow">
+                                <div class="row list-row">
+                                    <div class="col-md-10">
+                                        <div class="task-title">
+                                            <span class="task-title-sp"><input type="text" class="toDoForm" disabled></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="taskIcon">
+                                            <button class="btn btn-success btn-xs"><i class="fas fa-check"></i></button>
+                                            <button class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>
+                                            <button class="btn btn-danger btn-xs"><i class="far fa-trash-alt "></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li> -->
+
+
+                    </ul>
                 </div>
-
+                <div class="card-footer" id="messages">
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Show completed tasks</a>
+                    </div>
+                </div>
             </div>
-
-
-
-
-
-
-
-        </div><!-- Main Col END -->
+        </div>
+        <!-- Main Col END -->
 
     </div><!-- body-row END -->
 
@@ -172,13 +184,14 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <script src="js/profileScript.js"></script>
+    <script src="js/toDoScript.js"></script>
 </body>
 
 </html>

@@ -17,11 +17,13 @@ $(document).ready(function () {
                     window.location.href = "dash.html"
                     sessionStorage.setItem("username", data[i].userName)
                     sessionStorage.setItem("admin", data[i].isAdmin)
+                    sessionStorage.setItem("id", data[i].id)
                     break;
                 } else if ( (data[i].userName == $("#inputUser").val().trim()) && (data[i].password == $("#inputPassword").val().trim()) ) {
                     window.location.href = "dash.html"
                     sessionStorage.setItem("username", data[i].userName)
                     sessionStorage.setItem("admin", data[i].isAdmin)
+                    sessionStorage.setItem("id", data[i].id)
                     break;
                 }
             }
