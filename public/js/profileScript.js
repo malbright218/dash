@@ -28,9 +28,6 @@ $(document).ready(function () {
         $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
     }
   
-
-    $("#profile-link").on("click", function() {
-        window.location.href = "profile.html"
-    })
+    
 
 })
