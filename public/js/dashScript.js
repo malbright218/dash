@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    var showName = sessionStorage.getItem("name")
+    $("#nameTarget").append("Welcome, "+showName)
+
     $('#body-row .collapse').collapse('hide'); 
 
     // Collapse/Expand icon

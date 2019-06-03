@@ -1,6 +1,9 @@
 $(document).ready(function () {
 
+    var showName = sessionStorage.getItem("name")
+    $("#nameTarget").append("Welcome, "+showName)
 
+    $(".add-todo").focus()
     // Collapse/Expand icon
     $('#collapse-icon').addClass('fa-angle-double-left');
 
@@ -33,6 +36,7 @@ $(document).ready(function () {
             if ($(this).val() != '') {
                 var todo = $(this).val();
                 createTodo(todo);
+                
                 // countTodos();
             } else {
                 // some validation
@@ -41,6 +45,8 @@ $(document).ready(function () {
     });
 
     function createTodo(data) {
+        location.reload()
+        
         var listItem = $("<li>")
         listItem.addClass("toDoRow")
         var listRow = $("<div>")
@@ -65,6 +71,7 @@ $(document).ready(function () {
         var btn1 = $("<button>")
         var btn2 = $("<button>")
         var btn3 = $("<button>")
+       
         btn1.addClass("btn btn-success btn-xs")
         btn2.addClass("btn btn-primary btn-xs")
         btn3.addClass("btn btn-danger btn-xs")
@@ -91,21 +98,77 @@ $(document).ready(function () {
         newTask.UserId = sessionStorage.getItem("id")
 
         addTask(newTask)
+
     }
 
     function addTask(data) {
         $.post("/api/tasks", data)
+        
+
     }
 
-    $(document).on("click", ".btn", function() {
+    // Function to mark a task as complete
+    $(document).on("click", ".btn-success", function() {
         console.log(this.id)
-        var taskID = this.id[this.id.length -1]
-        console.log(taskID)
-        var btnid = this.id
-        var case1 = btnid.substring(0,4);
-        console.log(case1)
+        var updateTask = {}
+        updateTask.id = this.id
+        updateTask.taskStatus = "completed"
+        complete(updateTask)
     })
 
+    function complete(x) {
+        $.ajax({
+            method: "PUT",
+            url: "/api/tasks",
+            data: x
+        })
+        location.reload()
+    }
+    // End complete function
+    ////////////////////////
+    // Function to edit the text in the task
+    $(document).on("click", ".btn-primary", function() {
+        console.log(this.id)
+        var a = $("#span"+this.id).attr("placeholder")
+        console.log(a)
+        $("#span"+this.id).removeAttr("disabled")
+        $("#span"+this.id).focus()
+        $('.toDoForm').on('keypress', function (z) {
+            z.preventDefault
+            if (z.which == 13) {
+                if ($(this).val() != '') {
+                    var todo = $(this).val();
+                    console.log(todo);
+                    $("#span"+this.id).attr("placeholder", todo)
+                    var updateTask = {}
+                    updateTask.id = this.id.slice(-2)
+                    updateTask.textBody = todo
+                    console.log(updateTask)                   
+                    complete(updateTask)                    
+
+                } else {
+                    location.reload()
+                }
+            }
+        });
+    })
+    // End edit function
+    ////////////////////////
+    // Function to delete task
+    $(document).on("click", ".btn-danger", function() {
+        console.log(this.id)
+        var z = this.id
+        console.log(z)
+        deletePost(z)
+    })
+
+    function deletePost(id) {
+        $.ajax({
+            method: "DELETE",
+            url: "/api/tasks/" + id
+        })
+        location.reload()
+    }
 
 
 
@@ -125,10 +188,35 @@ $(document).ready(function () {
     $.get("/api/user/" + userID, display)
 
     function display(data) {
-        console.log(data.Tasks)
+        // console.log(data.Tasks)
         for (var i = 0; i < data.Tasks.length; i++) {
+
+            /////// COMPLETED TASKS
+            var cTask = data.Tasks[i].textBody
+            var cListItem = $("<li>")
+            cListItem.addClass("toDoRow")
+            var cListRow = $("<div>")
+            cListRow.addClass("row list-row")
+
+            var Ccol10 = $("<div>")
+            Ccol10.addClass("col-md-12")
+            var Ccol10div = $("<div>")
+            Ccol10div.addClass("task-title")
+            var p = $("<p>")
+            p.addClass("task-title-sp toDoForm task-complete")
+            p.append(cTask)
+            // var CspanInput = $("<input type='text' class='toDoForm' disabled>")
+            // CspanInput.addClass("task-complete")
+            // CspanInput.attr("placeholder", cTask)
+            // CspanInput.attr("id", "span"+data.Tasks[i].id)
+            // Cspan.append(p)
+            Ccol10div.append(p)
+            Ccol10.append(Ccol10div)
+            cListRow.append(Ccol10)
+            cListItem.append(cListRow)
+            $("#completedTarget").append(cListItem)
             if (data.Tasks[i].taskStatus === 'active') {
-                console.log(data.Tasks[i].textBody)
+                // console.log(data.Tasks[i].textBody)
                 var task = data.Tasks[i].textBody
                 var listItem = $("<li>")
                 listItem.addClass("toDoRow")
@@ -143,6 +231,7 @@ $(document).ready(function () {
                 span.addClass("task-title-sp")
                 var spanInput = $("<input type='text' class='toDoForm' disabled>")
                 spanInput.attr("placeholder", task)
+                spanInput.attr("id", "span"+data.Tasks[i].id)
                 span.append(spanInput)
                 col10div.append(span)
                 col10.append(col10div)
@@ -152,11 +241,11 @@ $(document).ready(function () {
                 var col2div = $("<div>")
                 col2div.addClass("taskIcon")
                 var btn1 = $("<button>")
-                btn1.attr("id", "btn1-"+data.Tasks[i].id)
+                btn1.attr("id", data.Tasks[i].id)
                 var btn2 = $("<button>")
-                btn2.attr("id", "btn2-"+data.Tasks[i].id)
+                btn2.attr("id", data.Tasks[i].id)
                 var btn3 = $("<button>")
-                btn3.attr("id", "btn3-"+data.Tasks[i].id)
+                btn3.attr("id", data.Tasks[i].id)
                 btn1.addClass("btn btn-success btn-xs")
                 btn2.addClass("btn btn-primary btn-xs")
                 btn3.addClass("btn btn-danger btn-xs")
@@ -176,6 +265,12 @@ $(document).ready(function () {
                 listItem.append(listRow)
                 $("#toDoTarget").append(listItem)
                 $(".add-todo").val('')
+                
+
+
+
+
+
             }
                        
         }

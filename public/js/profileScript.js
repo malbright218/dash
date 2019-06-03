@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    var showName = sessionStorage.getItem("name")
+    $("#nameTarget").append("Welcome, "+showName)
+
     $("form input[type=text], form input[type=email]").prop("disabled", true)
     $("#profileEdit").addClass("profileEditVisible")
     $("#profileSubmit").addClass("profileSubmitHidden")
@@ -88,7 +91,12 @@ $(document).ready(function () {
             (('' + day).length < 2 ? '0' : '') + day;
 
         var updateUser = {}
+
+
         updateUser.id = userId;
+
+        if (name1 !=)
+
         updateUser.firstName = name1;
         updateUser.lastName = name2;
         updateUser.phoneNumber = phone;

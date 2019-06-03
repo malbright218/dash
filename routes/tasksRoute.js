@@ -1,13 +1,13 @@
 var db = require("../models");
 
 module.exports = function (app) {
-    app.get("/api/tasks/:id", function(req, res) {
+    app.get("/api/tasks/:id", function (req, res) {
         db.Tasks.findOne({
             where: {
                 UserId: req.params.id
             },
             include: [db.User]
-        }).then(function(x) {
+        }).then(function (x) {
             res.json(x)
         })
     })
@@ -29,6 +29,17 @@ module.exports = function (app) {
                 res.json(dbPost);
             });
     });
+
+    app.delete("/api/tasks/:id", function(req, res) {
+        db.Tasks.destroy({
+          where: {
+            id: req.params.id
+          }
+        })
+          .then(function(dbPost) {
+            res.json(dbPost);
+          });
+      });
 
 
 }
