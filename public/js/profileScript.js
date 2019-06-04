@@ -16,10 +16,17 @@ $(document).ready(function () {
         var i = sessionStorage.getItem("id") - 1
         console.log(i)
         console.log(data[i])
+        var first3 = data[i].phoneNumber.substring(0,3)
+        console.log(first3)
+        var last4 = data[i].phoneNumber.slice(-4)
+        console.log(last4)
+        var mid3 = data[i].phoneNumber.substring(3,6)
+        console.log(mid3)
+
         $("#firstNameInput").attr("placeholder", data[i].firstName)
         $("#lastNameInput").attr("placeholder", data[i].lastName)
         $("#phoneInput").attr("placeholder", data[i].phoneNumber)
-        $("#extensionInput").attr("placeholder", "x" + data[i].extension)
+        $("#extensionInput").attr("placeholder",data[i].extension)
         $("#emailInput").attr("placeholder", data[i].email)
     }
 
@@ -71,6 +78,20 @@ $(document).ready(function () {
         $("form input[type=text], form input[type=email]").removeAttr("disabled")
         $("#profileEdit").removeClass("profileEditVisible").addClass("profileEditHidden")
         $("#profileSubmit").removeClass("profileSubmitHidden").addClass("profileSubmitVisible")
+
+        var f = $("#firstNameInput").attr("placeholder")
+        var l = $("#lastNameInput").attr("placeholder")
+        var p = $("#phoneInput").attr("placeholder")
+        var x = $("#extensionInput").attr("placeholder")
+        var e = $("#emailInput").attr("placeholder")
+
+        $("#firstNameInput").val(f)
+        $("#lastNameInput").val(l)
+        $("#phoneInput").val(p)
+        $("#extensionInput").val(x)
+        $("#emailInput").val(e)
+
+
     })
 
     $("#profileSubmit").on("click", function () {
@@ -95,7 +116,7 @@ $(document).ready(function () {
 
         updateUser.id = userId;
 
-        if (name1 !=)
+        
 
         updateUser.firstName = name1;
         updateUser.lastName = name2;
