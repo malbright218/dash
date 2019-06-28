@@ -1,49 +1,8 @@
-ul {
-    list-style: none;
-}
-
-.taskIcon {
-    display: inline;
-}
-
-.task-title {
-    padding-top: 4px;
-}
-.task-checkbox {
-    padding-top: 6px;
-}
-.toDoRow {
-    margin-bottom: 4px;
-}
-.list-row {
-    
-    padding-bottom: 5px;
-    padding-top: 2px;
-    border-left: 3px solid #FEDC3D;
-}
-
-.toDoForm {
-    width: 100%;
-}
-
-.task-complete {
-    text-decoration: line-through;
-   
-}
-
-
-
-
-
-/* //////////////////////////////////////////////// */
-/* //////////////////////////////////////////////// */
-/* //////////////////////////////////////////////// */
-/* //////////////////////////////////////////////// */
-/* //////////////////////////////////////////////// */
-/* //////////////////////////////////////////////// */
-
 body {
-    background-color: #CDCDCD;
+    background-image: url("../assets/chameleon.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
 #main-nav {
@@ -55,6 +14,19 @@ body {
 
 #message-badge {
     background-color: #01ABAA;
+}
+
+.container {
+    margin-top: 40px;
+    
+    
+}
+
+#articleTarget {
+    background-color: rgba(0,0,0,0.85) !important;
+    height: 48em;
+    color: #38B0A7;
+    width: 100%;
 }
 
 .fas, .far {
@@ -83,9 +55,9 @@ body {
 
 
 .test-area {
-    border: 0.5px solid black;
+    
     width: 100%;
-    height: 200px;
+  
 }
 
 /* ///////////////////////////////////////////////// */
@@ -151,6 +123,13 @@ body {
   display: inline;
   text-align: right;
   padding-left: 10px;
+}
+
+.checkedIn {
+    color: green;
+}
+.checkedOut {
+    color: red
 }
 
 /* font-family: 'Cabin', sans-serif;

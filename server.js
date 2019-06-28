@@ -1,42 +1,37 @@
-// *****************************************************************************
-// Server.js - This file is the initial starting point for the Node/Express server.
-//
-// ******************************************************************************
-// *** Dependencies
-// =============================================================
-var express = require("express");
-var bodyParser = require("body-parser");
+// NPM PACKAGES
+var express = require('express');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var passport = require('./config/passport')
 
-// Sets up the Express App
-// =============================================================
+// SETTING THE PORT
+var PORT = process.env.PORT || 4000;
+
+// IMPORT MODELS FOLDER
+var db = require("./models")
+
+// CREATING EXPRESS APP
 var app = express();
-var PORT = process.env.PORT || 8080;
-
-// Requiring our models for syncing
-var db = require("./models");
-
-// Sets up the Express app to handle data parsing
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-// parse application/json
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
-// Static directory
-app.use(express.static("public"));
+// SESSIONS 
+app.use(session({
+    secret: "secret garden",
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Routes FIX THESE BEFORE YOU START
-// =============================================================
-// require("./routes/html_routes.js")(app);
-require("./routes/userApiRoute.js")(app);
-require("./routes/tasksRoute.js")(app);
-// require("./routes/machineRoute.js")(app);
-// require("./routes/orderRoute.js")(app);
+// ROUTES
+require('./routes/api-routes')(app);
+require('./routes/html-routes')(app);
 
-// Syncing our sequelize models and then starting our Express app
-// =============================================================
-db.sequelize.sync({ force: true }).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
-});
+// LISTENER
+db.sequelize.sync().then(function() {
+    app.listen(PORT, function() {
+        console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+    })
+})
