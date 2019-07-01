@@ -17,22 +17,31 @@ body {
 }
 
 .container {
-    margin-top: 40px;
-    
-    
+    margin-top: 40px;   
 }
 
-#articleTarget {
-    background-color: rgba(0,0,0,0.85) !important;
-    height: 48em;
-    color: #38B0A7;
-    width: 100%;
+.card {
+    background-color: rgba(0,0,0,0.5);
 }
+
+.card:hover {
+    background-color: rgba(254,220,61,0.5)
+}
+
+.btn-link {
+    color: #FEDC3D;
+    text-decoration: none;
+}
+.btn-link:hover {
+    color: black;
+}
+
+
 
 .fas, .far {
     color: #FEDC3D;
 }
-
+/* NAVBAR STYLING /////////////////////////////////////////*/
 .main-nav-item {
     color: #000000;
 }
@@ -52,15 +61,11 @@ body {
     font-size: 22pt;
     font-family: 'Righteous', cursive;
 }
+/* NAVBAR STYLING /////////////////////////////////////////*/
 
 
-.test-area {
-    
-    width: 100%;
-  
-}
 
-/* ///////////////////////////////////////////////// */
+/* ////////// DO NOT TOUCH - FOR SIDE BAR MENU /////////////////////////////////////// */
 #body-row {
     margin-left:0;
     margin-right:0;
@@ -124,15 +129,3 @@ body {
   text-align: right;
   padding-left: 10px;
 }
-
-.checkedIn {
-    color: green;
-}
-.checkedOut {
-    color: red
-}
-
-/* font-family: 'Cabin', sans-serif;
-font-family: 'Abel', sans-serif;
-font-family: 'Righteous', cursive;
-font-family: 'Poiret One', cursive; */

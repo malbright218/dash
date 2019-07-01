@@ -67,11 +67,11 @@
         </a>
         <!-- Submenu content -->
         <div id='submenu1' class="collapse sidebar-submenu">
-          <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-            <span class="menu-collapsed">Charts</span>
+          <a class="list-group-item list-group-item-action bg-dark text-white" id="newsOn" state="off">
+            <span class="menu-collapsed">News</span>
           </a>
           <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-            <span class="menu-collapsed">Reports</span>
+            <span class="menu-collapsed">Weather</span>
           </a>
           <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
             <span class="menu-collapsed">Tables</span>
@@ -98,12 +98,26 @@
             <span class="menu-collapsed">Tasks</span>
           </div>
         </a>
-        <a class="bg-dark list-group-item list-group-item-action" id="checker">
+        <!-- LINKS MENU -->
+        <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
+          class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="far fa-check-circle fa-fw mr-3"></span>
-            <span class="menu-collapsed checkedOut" id="attend">Check In</span>
+            <span class="fas fa-link fa-fw mr-3"></span>
+            <span class="menu-collapsed">Links</span>
           </div>
         </a>
+        <!-- Submenu content -->
+        <div id='submenu1' class="collapse sidebar-submenu">
+          <a href="http://192.168.107.4/tbox/index.html" class="list-group-item list-group-item-action bg-dark text-white" target="_blank">
+            <span class="menu-collapsed">tBox</span>
+          </a>
+          <a href="https://email.accuratebox.com/owa" class="list-group-item list-group-item-action bg-dark text-white" target="_blank">
+            <span class="menu-collapsed">Outlook Web App</span>
+          </a>
+          <a href="https://www.linkedin.com" class="list-group-item list-group-item-action bg-dark text-white" target="_blank">
+            <span class="menu-collapsed">LinkedIn</span>
+          </a>
+        </div>
         <!-- Separator with title -->
         <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
           <small>OPTIONS</small>
@@ -136,79 +150,8 @@
     </div><!-- sidebar-container END -->
 
     <!-- MAIN -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6" id="news1">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="newsTitle1"></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the  and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-6" id="news2">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="newsTitle2"></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the  and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6" id="news3">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="newsTitle3"></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the  and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-6" id="news4">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="newsTitle4"></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the  and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6" id="news5">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="newsTitle5"></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the  and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-6" id="news6">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="newsTitle6"></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the  and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div>
-        </div>
-      </div>
+    <div class="container" id="target">
+      
     </div><!-- Main Col END -->
 
   </div><!-- body-row END -->
