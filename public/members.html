@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -22,140 +23,47 @@
     <a class="navbar-brand" id="navTitle" href="#">inside the box</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
+        <li><input id="myInput" type="text" placeholder="Search.."></li>
         <li class="nav-item active">
-          <a class="nav-link main-nav-item" href="dash.html">Home <span class="sr-only">(current)</span></a>
+          <button class="btn" id="addNewJob" data-toggle="modal" data-target="#exampleModalCenter">Add new</button>
         </li>
         <li class="nav-item active">
           <a class="nav-link main-nav-item" href="/logout">Log out <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active nav-link main-nav-item" id="nameTarget"></li>
       </ul>
-      
+
     </div>
   </nav><!-- NavBar END -->
 
+  <div class="table table-bordered" id="jobTarget">
+    <tbody>
 
-  <!-- Bootstrap row -->
-  <div class="row" id="body-row">
-    <!-- Sidebar -->
-    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
-      <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
-      <!-- Bootstrap List Group -->
-      <ul class="list-group">
-        <!-- Collapse action-->
-        <a href="#" data-toggle="sidebar-colapse"
-          class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
-          <div class="d-flex w-100 justify-content-start align-items-center">
-            <span id="collapse-icon" class="fas fa-bars"></span>
-            <!-- <span id="collapse-text" class="menu-collapsed">Collapse</span> -->
-          </div>
-        </a>
-        <!--End Collapse action-->
-
-        <!-- Separator with title -->
-        <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-          <small>MAIN MENU</small>
-        </li>
-        <!-- /END Separator -->
-        <!-- Menu with submenu -->
-        <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
-          class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="fas fa-tachometer-alt fa-fw mr-3"></span>
-            <span class="menu-collapsed">Dashboard</span>
-          </div>
-        </a>
-        <!-- Submenu content -->
-        <div id='submenu1' class="collapse sidebar-submenu">
-          <a class="list-group-item list-group-item-action bg-dark text-white" id="newsOn" state="off">
-            <span class="menu-collapsed">News</span>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-            <span class="menu-collapsed">Weather</span>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-            <span class="menu-collapsed">Tables</span>
-          </a>
-        </div>
-        <a href="profile.html" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="fas fa-user fa-fw mr-3"></span>
-            <span class="menu-collapsed">Profile</span>
-          </div>
-        </a>
-        <!-- Submenu content -->
-        <div id='submenu2' class="collapse sidebar-submenu">
-          <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-            <span class="menu-collapsed">Settings</span>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-            <span class="menu-collapsed">Password</span>
-          </a>
-        </div>
-        <a href="todo.html" class="bg-dark list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="fas fa-tasks fa-fw mr-3"></span>
-            <span class="menu-collapsed">Tasks</span>
-          </div>
-        </a>
-        <!-- LINKS MENU -->
-        <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
-          class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="fas fa-link fa-fw mr-3"></span>
-            <span class="menu-collapsed">Links</span>
-          </div>
-        </a>
-        <!-- Submenu content -->
-        <div id='submenu1' class="collapse sidebar-submenu">
-          <a href="http://192.168.107.4/tbox/index.html" class="list-group-item list-group-item-action bg-dark text-white" target="_blank">
-            <span class="menu-collapsed">tBox</span>
-          </a>
-          <a href="https://email.accuratebox.com/owa" class="list-group-item list-group-item-action bg-dark text-white" target="_blank">
-            <span class="menu-collapsed">Outlook Web App</span>
-          </a>
-          <a href="https://www.linkedin.com" class="list-group-item list-group-item-action bg-dark text-white" target="_blank">
-            <span class="menu-collapsed">LinkedIn</span>
-          </a>
-        </div>
-        <!-- Separator with title -->
-        <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-          <small>OPTIONS</small>
-        </li>
-        <!-- /END Separator -->
-        <a href="#" class="bg-dark list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="far fa-calendar-alt fa-fw mr-3"></span>
-            <span class="menu-collapsed">Calendar</span>
-          </div>
-        </a>
-        <a href="#" class="bg-dark list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="far fa-envelope fa-fw mr-3"></span>
-            <span class="menu-collapsed">Messages 
-            <span class="badge badge-pill ml-2" id="message-badge">5</span></span>
-          </div>
-        </a>
-        <!-- Separator without title -->
-        <li class="list-group-item sidebar-separator menu-collapsed"></li>
-        <!-- /END Separator -->
-        <a href="#" class="bg-dark list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="fas fa-question fa-fw mr-3"></span>
-            <span class="menu-collapsed">Help</span>
-          </div>
-        </a>
-
-      </ul><!-- List Group END-->
-    </div><!-- sidebar-container END -->
-
-    <!-- MAIN -->
-    <div class="container" id="target">
-      
-    </div><!-- Main Col END -->
-
+    </tbody>
+  </div>
   </div><!-- body-row END -->
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -170,7 +78,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <script src="js/dashScript.js"></script>
+  <!-- <script src="js/dataScript.js"></script> -->
 </body>
 
 </html>
