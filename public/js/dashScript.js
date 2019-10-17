@@ -1,9 +1,32 @@
 $(document).ready(function() {
+  var currentJobNo = {};
+  console.log(currentJobNo.number);
+  $("#newJobIndex").text(currentJobNo[0]);
   // NAVBAR PERSONALIZATION
   $.get("/api/user_data", showName);
   function showName(data) {
     $("#nameTarget").append("Welcome, " + data.name);
+    var name = data.name;
+    var names = name.split(" ");
+    var first = names[0].charAt(0);
+    var second = names[1].charAt(0);
+    var initial = first + second;
+    sessionStorage.setItem("initials", initial);
   }
+
+  $("#statusButton").on("click", function() {
+    if ($(this).val() === "active") {
+      $(this).attr("value", "inactive");
+      $(this).removeClass("btn-primary");
+      $(this).addClass("btn-secondary");
+      $(this).text("Repeat");
+    } else if ($(this).val() === "inactive") {
+      $(this).attr("value", "active");
+      $(this).removeClass("btn-secondary");
+      $(this).addClass("btn-primary");
+      $(this).text("New");
+    }
+  });
 
   $("#myInput").on("keyup", function() {
     var value = $(this)
@@ -37,6 +60,10 @@ $(document).ready(function() {
     // console.log(data);
 
     for (var i = 3150; i < data.length; i++) {
+      if (i + 1 == data.length) {
+        currentJobNo.number = data[i].jobNo + 1;
+      }
+
       var blankrow = $("<tr>"); // A new blank row
       var job = $("<td>"); // The job number
       var cust = $("<td>"); // The customer name
@@ -48,7 +75,8 @@ $(document).ready(function() {
       var chop = $("<td>"); // The current chop size
       var optimum = $("<td>"); // The optimum roll size
       var flute = $("<td>"); // The flute profile
-      if (data[i].flute === "B") { // Checking flute profile and assigning class based on it
+      if (data[i].flute === "B") {
+        // Checking flute profile and assigning class based on it
         flute.addClass("bflute");
       } else if (data[i].flute === "E") {
         flute.addClass("eflute");
@@ -62,7 +90,7 @@ $(document).ready(function() {
       var lays = $("<td>"); // The number of lays, if none then 1
       var status = $("<td>"); // The class of the job, new or repeat
       if (data[i].newJob === "Yes") {
-        blankrow.addClass("newJob")
+        blankrow.addClass("newJob");
       }
       var coating = $("<td>"); // The type of coating, mainly to distinguish UV coating
       var done = $("<td>"); // If the job is done through cutting
@@ -160,5 +188,100 @@ $(document).ready(function() {
     );
 
     $("#jobTarget").prepend(headrow);
+    $("#newJobIndex").text(currentJobNo.number);
   } // End of display function
+  console.log(currentJobNo);
+
+  // Function to add new jobs
+  $("#addNewJobClick").on("click", function() {
+    var newJobObject = {};
+
+    var d = new Date();
+
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+
+    var output =
+      d.getFullYear() +
+      "-" +
+      (month < 10 ? "0" : "") +
+      month +
+      "-" +
+      (day < 10 ? "0" : "") +
+      day;
+
+    var statusClass = $("#statusButton").val();
+
+    if (statusClass === "active") {
+      newJobObject.newJob = statusClass;
+    } else {
+      newJobObject.newJob = "repeat";
+    }
+
+    newJobObject.jobNo = $("#newJobIndex").text();
+    newJobObject.customer = $("#customerName")
+      .val()
+      .trim();
+    newJobObject.createdDate = output
+    newJobObject.createdBy = sessionStorage.getItem("initials")
+    newJobObject.csr = $("#csrSelector")
+      .val()
+      .trim();
+    newJobObject.sheets = $("#sheetCount")
+      .val()
+      .trim();
+    newJobObject.rollSize = $("#rollSizeInput")
+      .val()
+      .trim();
+    newJobObject.chopSize = $("#chopSizeInput")
+      .val()
+      .trim();
+    newJobObject.optimumRoll = $("#optimumRoll")
+      .val()
+      .trim();
+    newJobObject.flute = $("#fluteSelector")
+      .val()
+      .trim();
+    newJobObject.topSheet = $("#topSelector")
+      .val()
+      .trim();
+    newJobObject.medium = $("#mediumSelector")
+      .val()
+      .trim();
+    newJobObject.liner = $("#linerSelector")
+      .val()
+      .trim();
+    newJobObject.mill = $("#millSelector")
+      .val()
+      .trim();
+    newJobObject.lays = $("#layInput")
+      .val()
+      .trim();
+    newJobObject.coating = $("#coatingSelector")
+      .val()
+      .trim();
+      newJobObject.doneCutting = "";
+      newJobObject.oktoClose = "";
+      newJobObject.closedby = "";
+      newJobObject.closedDate = output;
+      newJobObject.analyzedBy = "";
+      newJobObject.comments = "";
+      newJobObject.needsAnalysis = 0;
+      newJobObject.createdAt = output;
+      newJobObject.updatedAt = output;
+
+    console.log(newJobObject);
+    gobabygo(newJobObject);
+  });
+
+  function gobabygo(x) {
+    $.post("/api/jobs", x);
+    location.reload();
+  }
+
+  $(".toggle").on("click", function() {
+    console.log("toggled");
+    var tclass = $(this).attr("class");
+    console.log(tclass);
+  });
 });

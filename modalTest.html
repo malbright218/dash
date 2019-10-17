@@ -12,37 +12,136 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Abel|Cabin|Poiret+One|Righteous&display=swap" rel="stylesheet">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="stylesheets/dashStyles.css" rel="stylesheet">
     <title>Inside the Box</title>
 </head>
 
 <body>
 
-    <div style="width: 50%; margin-left: 25%; margin-top: 10%;">
+    <br>
+    <input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success"
+        data-offstyle="danger">
 
-        <form>
-            <h4>Job number placeholder</h4>
-            <!---------------------------------------------------------------------->
-            <div class="form-group">
-                <label for="exampleInputEmail1">Customer name</label>
-                <input type="email" class="form-control" id="customerName" aria-describedby="emailHelp"
-                    placeholder="Customer">
+    <div>
+        <div class="row">
+            <div class="col">
+                <form>
+                    <h4>Job number placeholder</h4>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="customerName">Customer name</label>
+                        <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp"
+                            placeholder="Customer">
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="csrSelector">CSR</label>
+                        <select class="form-control" id="csrSelector">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="sheetCount">Sheets</label>
+                        <input type="number" class="form-control" id="sheetCount" aria-describedby="emailHelp"
+                            placeholder="Sheets">
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="rollSizeInput">Roll Size</label>
+                        <input type="number" class="form-control" id="rollSizeInput" aria-describedby="emailHelp"
+                            placeholder="Roll Size">
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="chopSizeInput">Chop Size</label>
+                        <input type="number" class="form-control" id="chopSizeInput" aria-describedby="emailHelp"
+                            placeholder="Chop Size">
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="fluteSelector">Flute</label>
+                        <select class="form-control" id="fluteSelector">
+                            <option>B</option>
+                            <option>E</option>
+                            <option>F</option>
+                        </select>
+                    </div>
+                    <!---------------------------------------------------------------------->
+                </form>
             </div>
-            <!---------------------------------------------------------------------->
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">CSR</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+            <div class="col">
+                <h4 style="visibility: hidden;">Text</h4>
+                <form>
+                    <div class="form-group">
+                        <label for="topSelector">Top Sheet</label>
+                        <select class="form-control" id="topSelector">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="mediumSelector">Medium</label>
+                        <select class="form-control" id="mediumSelector">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="linerSelector">Liner</label>
+                        <select class="form-control" id="linerSelector">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="millSelector">Mill</label>
+                        <select class="form-control" id="millSelector">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="layInput">Lays</label>
+                        <input type="number" class="form-control" id="layInput" aria-describedby="emailHelp"
+                            placeholder="Lays">
+                    </div>
+                    <!---------------------------------------------------------------------->
+                    <div class="form-group">
+                        <label for="coatingSelector">Coating</label>
+                        <select class="form-control" id="coatingSelector">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <!---------------------------------------------------------------------->
+                </form>
             </div>
-            <!---------------------------------------------------------------------->
-            
-
-        </form>
+        </div>
     </div>
 
 
@@ -61,6 +160,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </body>
 

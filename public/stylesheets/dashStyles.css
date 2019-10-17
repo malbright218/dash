@@ -1,49 +1,8 @@
-body {
-    /* background-image: url("../assets/chameleon.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%; */
-    overflow-x: scroll;
-}
 
-#main-nav {
-    background-color: #FEDC3D;
-    color: #000000;
-    font-family: 'Poiret One', cursive;
-    
-}
 
 #addNewJob {
     background-color: #FEDC3D;
     border: 0.5px solid black;
-}
-
-#message-badge {
-    background-color: #01ABAA;
-}
-
-.container {
-    margin-top: 40px;   
-}
-
-.card {
-    background-color: rgba(0,0,0,0.5);
-}
-
-.card:hover {
-    background-color: rgba(254,220,61,0.5)
-}
-
-.card-body {
-    color: #fff;
-}
-
-.btn-link {
-    color: #FEDC3D;
-    text-decoration: none;
-}
-.btn-link:hover {
-    color: black;
 }
 
 th {
@@ -51,19 +10,19 @@ th {
 }
 
 #jobTarget {
-    margin-top: 60px;
+    margin-top: 70px;
+    text-align: center;
 }
 
-.navbar {
-    position: fixed;
-    overflow: hidden;
-    top: 0;
+.toggle {
+    width: 100%;    
+}
+
+#toggleBox {
     width: 100%;
 }
 
-
-
-/* FLUTE STYLING ////////////////////////////////////////////*/
+/* TABLE STYLING ////////////////////////////////////////////*/
 .bflute {
     background-color: #0600FF;
     color: #fff;
@@ -86,13 +45,22 @@ th {
     background-color: #17A2B8;
 }
 
-
-
-
-.fas, .far {
-    color: #FEDC3D;
-}
 /* NAVBAR STYLING /////////////////////////////////////////*/
+.navbar {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#main-nav {
+    background-color: #FEDC3D;
+    color: #000000;
+    font-family: 'Poiret One', cursive;
+    
+}
+
 .main-nav-item {
     color: #000000;
 }
