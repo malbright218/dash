@@ -12,7 +12,7 @@ module.exports = function(app) {
     // They won't get this or even be able to access this page if they aren't authed
     res.json("/members");
   });
-//
+  //
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
@@ -22,28 +22,29 @@ module.exports = function(app) {
       email: req.body.email,
       password: req.body.password,
       name: req.body.name
-    }).then(function() {
-      res.redirect(307, "/api/login");
-    }).catch(function(err) {
-      console.log(err);
-      res.json(err);
-      // res.status(422).json(err.errors[0].message);
-    });
+    })
+      .then(function() {
+        res.redirect(307, "/api/login");
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
+        // res.status(422).json(err.errors[0].message);
+      });
   });
-//
+  //
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
   });
-//
+  //
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
-    }
-    else {
+    } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
@@ -54,11 +55,26 @@ module.exports = function(app) {
     }
   });
 
-  
+  app.get("/api/jobs", function(req, res) {
+    db.Job.findAll({}).then(function(data) {
+      res.json(data);
+    });
+  });
 
-  
+  app.post("/api/jobs", function(req, res) {
+    db.Job.create(req.body).then(function(data) {
+      res.json(data);
+    });
+  });
 
-
-
-
+  app.put("/api/jobs", function(req, res) {
+    console.log(req);
+    db.Job.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+  });
 };

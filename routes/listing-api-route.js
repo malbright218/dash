@@ -22,7 +22,7 @@ module.exports = function(app) {
     console.log(req.body);
 
     var dbQuery =
-      "INSERT INTO dash.Jobs (jobNo, customer, createdDate, createdBy, csr, sheets, rollSize, chopSize, optimumRoll, flute, topSheet, medium, liner, mill,lays, newJob, coating, doneCutting, oktoClose, closedby, closedDate, analyzedBy, comments, needsAnalysis, createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      "INSERT INTO dash.Jobs (jobNo, customer, createdDate, createdBy, csr, sheets, rollSize, chopSize, optimumRoll, flute, topSheet, medium, liner, mill,lays, newJob, coating, doneCutting, oktoClose, closedby, closedDate, analyzedBy, comments, needsAnalysis, createdAt, updatedAt) VALUES ?";
 
     connection.query(
       dbQuery,
