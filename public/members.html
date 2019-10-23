@@ -19,49 +19,38 @@
 </head>
 
 <body>
-  <div class="wrapper">
-    <!-- Sidebar Holder -->
-    <nav id="sidebar">
-      <div class="sidebar-header">
-        <img src="assets/cham.png" id="navLogo">
-        <p>job listing</p>
-      </div>
-
-      <ul class="list-unstyled components">
+  <!-- Bootstrap NavBar -->
+  <nav class="navbar navbar-expand-lg" id="main-nav">
+    <img src="assets/cham.png" id="navLogo">
+    <a class="navbar-brand" id="navTitle" href="#">inside the box</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li><input id="myInput" type="text" placeholder="Search.."></li>
         <li class="nav-item active">
-          <button class="btn btn-outline" id="addNewJob" data-toggle="modal" data-target="#exampleModalCenter">Add new</button>
+          <button class="btn" id="addNewJob" data-toggle="modal" data-target="#newJobModal">Add new</button>
         </li>
-        <br>
         <li class="nav-item active">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="myInput">
-          </form>
+          <button class="btn" id="addRepeatJobButton" data-toggle="modal" data-target="#repeatJobModal">Add repeat</button>
         </li>
-        <br>
         <li class="nav-item active">
-          <a class="nav-link main-nav-item" href="/logout">Log out </a>
+          <button class="btn" id="logOutButton"><a class="nav-link main-nav-item" href="/logout" style="padding: 0px;">Log out </a></button>
         </li>
-
+        <li class="nav-item active nav-link main-nav-item" id="nameTarget"></li>
       </ul>
-    </nav>
-    <div class="navbar-header">
-      <button type="button" id="sidebarCollapse" class="navbar-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-    <div class="container-fluid">
-      <div class="table table-bordered" id="jobTarget">
-        <tbody></tbody>
-      </div>
-    </div>
-    
 
+    </div>
+  </nav><!-- NavBar END -->
+
+  <div class="container-fluid">
+    <div class="table table-bordered" id="jobTarget">
+      <tbody></tbody>
+    </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+
+
+  <!-- New Job Modal -->
+  <div class="modal fade" id="newJobModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -123,23 +112,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div class="form-group">
-                    <label for="rollSizeInput">Roll Size</label>
-                    <input type="number" class="form-control" id="rollSizeInput" aria-describedby="emailHelp"
-                      placeholder="Roll Size">
-                  </div>                  
-                  <div class="form-group">
-                    <label for="chopSizeInput">Chop Size</label>
-                    <input type="number" class="form-control" id="chopSizeInput" aria-describedby="emailHelp"
-                      placeholder="Chop Size">
-                  </div>                  
-                  <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="rollChopSize">Roll x Chop</span>
-                      </div>
-                      <input type="text" class="form-control">
-                      <input type="text" class="form-control">
-                    </div>-->
                   <div class="form-group">
                     <label for="optimumRoll">Optimum Roll</label>
                     <input type="number" class="form-control" id="optimumRoll" aria-describedby="emailHelp"
@@ -159,10 +131,7 @@
                 </form>
               </div>
               <div class="col">
-                <button type="button" class="btn btn-primary" id="statusButton" value="active">New</button>
-
-                <!-- <input type="checkbox" checked data-toggle="toggle" data-on="New" data-off="Repeat"
-                  data-onstyle="success" data-offstyle="secondary" data-width="150" id="toggleSelector"> -->
+                <button type="button" class="btn btn-primary" id="statusButton" value="new">New</button>
                 <form>
                   <div class="form-group">
                     <label for="topSelector">Top Sheet</label>
@@ -173,7 +142,6 @@
                       <option>12pt.</option>
                       <option>14pt.</option>
                       <option>16pt.</option>
-
                     </select>
                   </div>
                   <!---------------------------------------------------------------------->
@@ -181,10 +149,10 @@
                     <label for="mediumSelector">Medium</label>
                     <select class="form-control" id="mediumSelector">
                       <option>Select...</option>
-                      <option>23#</option>
-                      <option>26#</option>
-                      <option>26# Bleached</option>
-                      <option>33#</option>
+                      <option>23 lb.</option>
+                      <option>26 lb.</option>
+                      <option>26 lb. Bleached</option>
+                      <option>33 lb.</option>
                     </select>
                   </div>
                   <!---------------------------------------------------------------------->
@@ -192,23 +160,23 @@
                     <label for="linerSelector">Liner</label>
                     <select class="form-control" id="linerSelector">
                       <option>Select...</option>
-                      <option>26#</option>
-                      <option>26# Bleached</option>
-                      <option>30# Bleached</option>
-                      <option>31#</option>
-                      <option>33# Bleached</option>
-                      <option>33# Mottled</option>
-                      <option>33# Printed</option>
-                      <option>35#</option>
-                      <option>35# HCL</option>
-                      <option>38# Printed</option>
-                      <option>41#</option>
-                      <option>42#</option>
-                      <option>42# Bleached</option>
-                      <option>42# Mottled</option>
-                      <option>50.5#</option>
-                      <option>55#</option>
-                      <option>55# Mottled</option>
+                      <option>26 lb.</option>
+                      <option>26 lb. Bleached</option>
+                      <option>30 lb. Bleached</option>
+                      <option>31 lb.</option>
+                      <option>33 lb. Bleached</option>
+                      <option>33 lb. Mottled</option>
+                      <option>33 lb. Printed</option>
+                      <option>35 lb.</option>
+                      <option>35 lb. HCL</option>
+                      <option>38 lb. Printed</option>
+                      <option>41 lb.</option>
+                      <option>42 lb.</option>
+                      <option>42 lb. Bleached</option>
+                      <option>42 lb. Mottled</option>
+                      <option>50.5 lb.</option>
+                      <option>55 lb.</option>
+                      <option>55 lb. Mottled</option>
                     </select>
                   </div>
                   <!---------------------------------------------------------------------->
@@ -249,12 +217,105 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="addNewJobClick">Save changes</button>
+          <button type="button" class="btn btn-primary" id="addNewJobClick">Post</button>
         </div>
       </div>
     </div>
   </div>
+  <!--/////////////////////////////////////////////////////////////////////// 
 
+//////////////////////////////////////////////////////////////////////////-->
+  <!-- Repeat Job Modal -->
+  <div class="modal fade" id="repeatJobModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="repeatJobNumber">Last job</span>
+            </div>
+            <input type="text" class="form-control" placeholder="" aria-label="Job Number" id="lastJobInput"
+              aria-describedby="basic-addon1">
+            <button class="btn btn-outline-secondary" id="findLastJob" type="button">Find</button>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="row">
+              <div class="col">
+                <form>
+                  <!---------------------------------------------------------------------->
+                  <h6>Customer Name</h6>
+                  <p id="repeatCustomerTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <h6>CSR</h6>
+                  <p id="repeatCSRTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <div class="row">
+                    <div class="col">
+                      <h6>Roll Size</h6>
+                      <p id="repeatRollSizeTarget"></p>
+                    </div>
+                    <div class="col">
+                      <h6>Chop Size</h6>
+                      <p id="repeatChopSizeTarget"></p>
+                    </div>
+                  </div>
+                  <!---------------------------------------------------------------------->
+                  <h6>Optimum Roll Size</h6>
+                  <p id="repeatOptimumRollTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <h6>Flute</h6>
+                  <p id="repeatFluteTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <div class="form-group">
+                    <label for="sheetCount">Sheets</label>
+                    <input type="number" class="form-control" id="sheetCount2" aria-describedby="emailHelp"
+                      placeholder="Sheets">
+                  </div>
+                  <!---------------------------------------------------------------------->
+                </form>
+              </div>
+              <div class="col">
+                <form>
+                  <!---------------------------------------------------------------------->
+                  <h6>Top Sheet</h6>
+                  <p id="repeatTopSheetTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <h6>Medium</h6>
+                  <p id="repeatMediumTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <h6>Liner</h6>
+                  <p id="repeatLinerTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <h6>Mill</h6>
+                  <p id="repeatMillTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <h6>Coating</h6>
+                  <p id="repeatCoatingTarget"></p>
+                  <!---------------------------------------------------------------------->
+                  <div class="form-group">
+                    <label for="layInput">Lays</label>
+                    <input type="number" class="form-control" id="layInput2" aria-describedby="emailHelp"
+                      placeholder="Lays">
+                  </div>
+                  <!---------------------------------------------------------------------->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addRepeatJobClick">Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -271,15 +332,6 @@
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <script src="js/dashScript.js"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-        $(this).toggleClass('active');
-      });
-    });
-  </script>
   <!-- <script src="js/dataScript.js"></script> -->
 </body>
 

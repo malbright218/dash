@@ -1,52 +1,37 @@
 $(document).ready(function() {
+  /////////////////////////////////////////////////
+  var currentJobNo = {}; // Setting global for a current job holder
+  /////////////////////////////////////////////////
+  $("#newJobIndex").text(currentJobNo[0]); // filling the modal with the current job number
+  /////////////////////////////////////////////////
   // NAVBAR PERSONALIZATION
   $.get("/api/user_data", showName);
   function showName(data) {
     $("#nameTarget").append("Welcome, " + data.name);
-    var name = data.name;
-    var names = name.split(" ");
-    var first = names[0].charAt(0);
-    var second = names[1].charAt(0);
-    var initial = first + second;
+    // var name = data.name;
+    // var names = name.split(" ");
+    // var first = names[0];
+    // var second = names[1];
+    // var initial = first + second;
     sessionStorage.setItem("initials", data.name);
   }
+  /////////////////////////////////////////////////
+  // $("#statusButton").on("click", function() {
+  //   if ($(this).val() === "active") {
+  //     $(this).attr("value", "inactive");
+  //     $(this).removeClass("btn-primary");
+  //     $(this).addClass("btn-secondary");
+  //     $(this).text("Repeat");
+  //   } else if ($(this).val() === "inactive") {
+  //     $(this).attr("value", "active");
+  //     $(this).removeClass("btn-secondary");
+  //     $(this).addClass("btn-primary");
+  //     $(this).text("New");
+  //   }
+  // });
 
-  var tableOffset = $("#jobTarget").offset().top;
-  var $header = $("#jobTarget > thead").clone();
-  var $fixedHeader = $("#header-fixed").append($header);
-  
-  $(window).bind("scroll", function() {
-      var offset = $(this).scrollTop();
-      
-      if (offset >= tableOffset && $fixedHeader.is(":hidden")) {
-          $fixedHeader.show();
-      }
-      else if (offset < tableOffset) {
-          $fixedHeader.hide();
-      }
-  });
-
-
-
-
-
-  var currentJobNo = {};
-  $("#newJobIndex").text(currentJobNo[0]);
-
-  $("#statusButton").on("click", function() {
-    if ($(this).val() === "active") {
-      $(this).attr("value", "inactive");
-      $(this).removeClass("btn-primary");
-      $(this).addClass("btn-secondary");
-      $(this).text("Repeat");
-    } else if ($(this).val() === "inactive") {
-      $(this).attr("value", "active");
-      $(this).removeClass("btn-secondary");
-      $(this).addClass("btn-primary");
-      $(this).text("New");
-    }
-  });
-
+  /////////////////////////////////////////////////
+  ///// TABLE SEARCH FUNCTION ////////////////////
   $("#myInput").on("keyup", function() {
     var value = $(this)
       .val()
@@ -60,7 +45,8 @@ $(document).ready(function() {
       );
     });
   });
-
+  /////////////////////////////////////////////////
+  ///// ADD COMMAS TO NUMBERS IN TABLE/////////////
   function addCommas(nStr) {
     nStr += "";
     x = nStr.split(".");
@@ -72,17 +58,15 @@ $(document).ready(function() {
     }
     return x1 + x2;
   }
-
+  /////////////////////////////////////////////////
+  ///// FUNCTION TO DISPLAY JOBS IN TABLE /////////
   $.get("/api/jobs", display);
-
   function display(data) {
-    // console.log(data);
-
-    for (var i = 3000; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
       if (i + 1 == data.length) {
         currentJobNo.number = data[i].jobNo + 1;
       }
-
+      // Variables below to help set up the table for population
       var blankrow = $("<tr>"); // A new blank row
       var job = $("<td>"); // The job number
       var cust = $("<td>"); // The customer name
@@ -108,7 +92,8 @@ $(document).ready(function() {
       var mill = $("<td>"); // The top sheet mill
       var lays = $("<td>"); // The number of lays, if none then 1
       var status = $("<td>"); // The class of the job, new or repeat
-      if (data[i].newJob === "Yes") {
+      if (data[i].newJob === "new") {
+        // If the job is new, add the class newJob to highlight
         blankrow.addClass("newJob");
       }
       var coating = $("<td>"); // The type of coating, mainly to distinguish UV coating
@@ -116,72 +101,33 @@ $(document).ready(function() {
       var close = $("<td>"); // If the job is ok to close
       var closeby = $("<td>"); // Who closed the job
       var closedate = $("<td>"); // The date the job was closed
-      var aby = $("<td>"); // Who analyzed the job
+      var action1 = $("<td>"); // Who analyzed the job
       var comments = $("<td>"); // Any comments for this particular job
-      // var needsa = $("<td>"); // If the job still needs to be analyzed
 
-      var closeColumn = $("<td>");
-      var closebtn = $("<button>");
-      var a = data[i].doneCutting;
-      var b = data[i].oktoClose;
-      var closeCheck = new Date(data[i].closedDate);
-      var y = jQuery.type(closeCheck);
-      if (y === "date" && closeCheck.getFullYear() > 2010) {
-        closebtn.css("visibility", "hidden");
-      } else if (a.toLowerCase() === "x" && b.toLowerCase() === "x") {
-        closebtn.addClass("btn btn-success");
-        closebtn.append("X");
-        closebtn.attr("case", "close");
-        closebtn.attr("id", data[i].id);
-      } else {
-        closebtn.css("visibility", "hidden");
-      }
-      // var closeCheck = new Date(data[i].closedDate);
-      // var y = jQuery.type(closeCheck);
-      // if (y === "date" && closeCheck.getFullYear() > 2010) {
-      //   closebtn.addClass("btn btn-danger disabled ");
-      //   closebtn.append("-");
-      //   closebtn.attr("status", "disabled");
-
-      // } else {
-      //   closebtn.addClass("btn btn-success disabled");
-      //   closebtn.append("X");
-      //   closebtn.attr("status", "enabled");
-      // }
-      // if (
-      //   data[i].doneCutting.toLowerCase() === "x" &&
-      //   data[i].oktoClose.toLowerCase() === "x" &&
-      //   closeCheck.getFullYear() > 2010
-      // ) {
-      // } else if (
-      //   data[i].doneCutting.toLowerCase() === "x" &&
-      //   data[i].oktoClose.toLowerCase() === "x"
-      // ) {
-      //   closebtn.removeClass("disabled");
-      // }
-
-      closeColumn.append(closebtn);
-
+      // Appending data to the <td> elements above
       job.append(data[i].jobNo);
       cust.append(data[i].customer);
+      // Timestamp for the creation of a new table row, i.e. a new job number
       var createdTime = data[i].createdDate;
       var createdDate = moment(createdTime).format("MM-DD-YY");
       created.append(createdDate);
-      // Creating initials for table for created by field
-      var createName = data[i].createdBy;
-      var names1 = createName.split(" ");
-      var first1 = names1[0].charAt(0);
-      var second1 = names1[1].charAt(0);
-      var createinitial = first1 + second1;
-      createdby.append(createinitial);
-      // Creating initials for table for csr field
-      var csrname = data[i].csr;
-      var names2 = csrname.split(" ");
-      var first2 = names2[0].charAt(0);
-      var second2 = names2[1].charAt(0);
-      var csrinitial = first2 + second2;
-      csr.append(csrinitial);
-
+      //////////////////////////////////////
+      // Setting names to be initials to save horizontal space
+      var name = data[i].createdBy;
+      var names = name.split(" ");
+      var first = names[0].charAt(0);
+      var second = names[1].charAt(0);
+      var initial = first + second;
+      createdby.append(initial);
+      //////////////////////////////////////
+      // Setting names to be initials to save horizontal space
+      var csrName = data[i].csr;
+      var csrNames = csrName.split(" ");
+      var csrFirst = csrNames[0].charAt(0);
+      var csrSecond = csrNames[1].charAt(0);
+      var csrInitial = csrFirst + csrSecond;
+      csr.append(csrInitial);
+      //////////////////////////////////////
       var num = data[i].sheets;
       num = addCommas(num);
       sheets.append(num);
@@ -196,59 +142,55 @@ $(document).ready(function() {
       lays.append(data[i].lays);
       status.append(data[i].newJob);
       coating.append(data[i].coating);
+      /////////////////////////////////////////
+      ////////////// BUTTON WORK //////////////
+      /////////////////////////////////////////
+      // console.log(data[0])
+      // console.log(data[1])
+      // console.log(data[2])
 
-      if (data[i].doneCutting === "x" || data[i].doneCutting === "X") {
-        var doneCuttingBtn = $("<button>");
-        doneCuttingBtn.addClass("btn btn-danger disabled");
-        doneCuttingBtn.append("✓");
-        doneCuttingBtn.attr("id", data[i].id);
-        doneCuttingBtn.attr("status", "disabled");
-        doneCuttingBtn.attr("case", "done");
-        done.append(doneCuttingBtn);
-      } else {
-        var doneCuttingBtn = $("<button>");
-        doneCuttingBtn.addClass("btn btn-success");
-        doneCuttingBtn.append("X");
-        doneCuttingBtn.attr("id", data[i].id);
-        doneCuttingBtn.attr("case", "done");
-        done.append(doneCuttingBtn);
+      if (data[i].doneCutting != "yes") { // If the job is not done through cutting, add a button that allows us to mark it so
+        var doneBtn = $("<button>");
+        doneBtn.addClass("btn btn-primary");
+        doneBtn.append("X");
+        doneBtn.attr("id", "cut|"+data[i].id)
+        done.append(doneBtn);
+      } else {  // If the job is done through cutting, append the status 'yes'
+        done.append(data[i].doneCutting);
       }
 
-      if (data[i].oktoClose === "x" || data[i].oktoClose === "X") {
+      if (data[i].oktoClose != "yes") {
         var okBtn = $("<button>");
-        okBtn.addClass("btn btn-danger disabled");
-        okBtn.append("✓");
-        okBtn.attr("id", data[i].id);
-        okBtn.attr("case", "ok");
-        close.append(okBtn);
-      } else {
-        var okBtn = $("<button>");
-        okBtn.addClass("btn btn-success");
+        okBtn.addClass("btn btn-primary");
         okBtn.append("X");
-        okBtn.attr("id", data[i].id);
-        okBtn.attr("case", "ok");
+        okBtn.attr("id", "ok|"+data[i].id)
         close.append(okBtn);
-      }
-
-      // Creating initials for table for closedby field
-      var closedName = data[i].closedby;
-      var names3 = closedName.split(" ");
-      var first3 = names3[0].charAt(0);
-      var second3 = names3[1].charAt(0);
-      var closedinitial = first3 + second3;
-      closeby.append(closedinitial);
-
-      var closedTime = data[i].closedDate;
-      if (closedTime === "1900-01-01" || closedTime === "") {
-        var closedDate = "";
       } else {
-        var closedDate = moment(closedTime).format("MM-DD-YY");
+        close.append(data[i].oktoClose);
       }
 
-      closedate.append(closedDate);
-      aby.append(data[i].analyzedBy);
-      // comments.append(data[i].comments);
-
+      var x = new Date(data[i].closedDate);
+      var y = x.getFullYear();
+      if (
+        data[i].doneCutting === "yes" &&
+        data[i].oktoClose === "yes" &&
+        y < 2000
+      ) {
+        var closingBtn = $("<button>")
+        closingBtn.addClass("btn btn-primary")
+        closingBtn.append("X")
+        closingBtn.attr("id","close|"+data[i].id)
+        action1.append(closingBtn)
+      } else if (
+        data[i].doneCutting === "yes" &&
+        data[i].oktoClose === "yes" &&
+        y >= 2000
+      ) {
+        closeby.append(data[i].closedby);
+        closedate.append(data[i].closedDate);
+      }
+      //////////////////////////////////////
+      // Appending all elements to a row
       blankrow.append(
         job,
         cust,
@@ -271,11 +213,11 @@ $(document).ready(function() {
         close,
         closeby,
         closedate,
-        aby,
-        closeColumn
+        action1
         // comments
       );
-
+      //////////////////////////////////////
+      // Appending the row to the table
       $("#jobTarget").append(blankrow);
     } // End of for loop
     var headrow = $(
@@ -301,24 +243,22 @@ $(document).ready(function() {
         "<th>Ok to Close</th>" +
         "<th>Closed By</th>" +
         "<th>Closed Date</th>" +
-        "<th>Analyzed By</th>" +
-        "<th>Close</th>" +
+        "<th>Action</th>" +
+        // "<th>Comments</th>"+
         "</tr></thead>"
     );
-      
+
     $("#jobTarget").prepend(headrow);
     $("#newJobIndex").text(currentJobNo.number);
   } // End of display function
+  console.log(currentJobNo);
 
   // Function to add new jobs
   $("#addNewJobClick").on("click", function() {
     var newJobObject = {};
-
     var d = new Date();
-
     var month = d.getMonth() + 1;
     var day = d.getDate();
-
     var output =
       d.getFullYear() +
       "-" +
@@ -388,74 +328,135 @@ $(document).ready(function() {
     newJobObject.createdAt = output;
     newJobObject.updatedAt = output;
 
+    console.log(newJobObject);
     gobabygo(newJobObject);
   });
 
+  // FUNCTION TO UPDATE STATUS OF JOBS
+  $(document).on("click", ".btn-primary", function() {
+    console.log(this.id)
+    var clicked = this.id;
+    var action = clicked.split("|");
+    console.log(action)
+    if (action[0] === "cut") {
+      var updateJob = {}
+      updateJob.id = action[1]
+      updateJob.doneCutting = "yes"
+      update(updateJob)
+    } else if(action[0] === "ok") {
+      var updateJob = {}
+      updateJob.id = action[1]
+      updateJob.oktoClose = "yes"
+      update(updateJob)
+    } else if (action[0] === "close"){
+      var updateJob = {}
+      updateJob.id = action[1]
+      updateJob.closedby = sessionStorage.getItem("initials")
+      updateJob.closedDate = new Date()
+      update(updateJob)
+    }
+  })
+
+
+  function update(x) {
+    $.ajax({
+        method: "PUT",
+        url: "/api/jobs",
+        data: x
+    })
+    location.reload()
+}
+
+
+
+
+
+
+
   function gobabygo(x) {
     $.post("/api/jobs", x);
-    document.location.reload(true);
-  }
-
-  $(".toggle").on("click", function() {
-    var tclass = $(this).attr("class");
-  });
-
-  // MARK A JOB DONE THROUGH CUTTING OR OK TO CLOSE
-
-  function updateDoneCutting(x) {
-    $.ajax({
-      method: "PUT",
-      url: "/api/jobs",
-      data: x
-    });
     location.reload();
   }
 
-  $(document).on("click", ".btn", function() {
-    console.log(this.id);
-    if ($(this).attr("status") === "disabled") {
-      console.log("this butting is disabled fuck face");
-    } else if ($(this).attr("case") === "done") {
-      console.log("i can do something");
-      $(this).removeClass("btn-success");
-      $(this).addClass("btn-danger disabled");
-      $(this).attr("status", "disabled");
-      $(this).text("✓");
-      var q = confirm("Are you sure this is done through cutting?");
-      if (q == true) {
-        var updateJobLine = {};
-        updateJobLine.id = this.id;
-        updateJobLine.doneCutting = "X";
-        updateDoneCutting(updateJobLine);
-        // do the updating function
-      } else {
-        // dont do anything
-      }
-    } else if ($(this).attr("case") === "ok") {
-      $(this).removeClass("btn-success");
-      $(this).addClass("btn-danger disabled");
-      $(this).attr("status", "disabled");
-      $(this).text("✓");
-      var r = confirm("Are you sure this is ok to close?");
-      if (r == true) {
-        var updateJobLine = {};
-        updateJobLine.id = this.id;
-        updateJobLine.oktoClose = "X";
-        updateDoneCutting(updateJobLine);
-        // do the updating function
-      } else {
-        // dont do anything
-      }
-    } else if ($(this).attr("case") === "close") {
-      $(this).removeClass("btn-success");
-      $(this).css("visibility", "hidden");
-      var s = confirm("Are you sure you want to close this job?");
-      if (s == true) {
-        var updateJobLine = {};
-        updateJobLine.id = this.id;
-        updateJobLine.closedDate = new Date();
-        updateDoneCutting(updateJobLine);
-      }
-    }
+  $(".toggle").on("click", function() {
+    console.log("toggled");
+    var tclass = $(this).attr("class");
+    console.log(tclass);
+  });
+
+  // A function to populate the repeat job modal with relevant information
+  $("#findLastJob").on("click", function() {
+    var number = $("#lastJobInput").val();
+    $.get("/api/jobs/" + number, function(data) {
+      console.log(data);
+      console.log(data.customer);
+      console.log(number);
+      console.log(currentJobNo);
+      $("#repeatCustomerTarget").html(data.customer);
+      $("#repeatCSRTarget").html(data.csr);
+      $("#repeatRollSizeTarget").html(data.rollSize);
+      $("#repeatChopSizeTarget").html(data.chopSize);
+      $("#repeatOptimumRollTarget").html(data.optimumRoll);
+      $("#repeatFluteTarget").html(data.flute);
+      $("#repeatTopSheetTarget").html(data.topSheet);
+      $("#repeatMediumTarget").html(data.medium);
+      $("#repeatLinerTarget").html(data.liner);
+      $("#repeatMillTarget").html(data.mill);
+      $("#repeatCoatingTarget").html(data.coating);
+    });
+  });
+
+  // Function to add repeat jobs
+  $("#addRepeatJobClick").on("click", function() {
+    console.log(
+      $("#sheetCount")
+        .val()
+        .trim()
+    );
+    var newJobObject = {};
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var output =
+      d.getFullYear() +
+      "-" +
+      (month < 10 ? "0" : "") +
+      month +
+      "-" +
+      (day < 10 ? "0" : "") +
+      day;
+    newJobObject.jobNo = currentJobNo.number;
+    newJobObject.customer = $("#repeatCustomerTarget").text();
+    newJobObject.createdDate = output;
+    newJobObject.createdBy = sessionStorage.getItem("initials");
+    newJobObject.csr = $("#repeatCustomerTarget").text();
+    newJobObject.sheets = $("#sheetCount2")
+      .val()
+      .trim();
+    newJobObject.rollSize = $("#repeatRollSizeTarget").text();
+    newJobObject.chopSize = $("#repeatChopSizeTarget").text();
+    newJobObject.optimumRoll = $("#repeatOptimumRollTarget").text();
+    newJobObject.flute = $("#repeatFluteTarget").text();
+    newJobObject.topSheet = $("#repeatTopSheetTarget").text();
+    newJobObject.medium = $("#repeatMediumTarget").text();
+    newJobObject.liner = $("#repeatLinerTarget").text();
+    newJobObject.mill = $("#repeatMillTarget").text();
+    newJobObject.lays = $("#layInput2")
+      .val()
+      .trim();
+    newJobObject.coating = $("#repeatCoatingTarget").text();
+    newJobObject.doneCutting = "";
+    newJobObject.oktoClose = "";
+    newJobObject.closedby = "";
+    newJobObject.closedDate = output;
+    newJobObject.analyzedBy = "";
+    newJobObject.newJob = "repeat";
+    newJobObject.comments = "";
+    newJobObject.needsAnalysis = 0;
+    newJobObject.createdAt = output;
+    newJobObject.updatedAt = output;
+
+    console.log(newJobObject);
+    gobabygo(newJobObject);
   });
 });

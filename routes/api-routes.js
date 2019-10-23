@@ -61,6 +61,16 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/jobs/:jobNo", function(req, res) {
+    db.Job.findOne({
+      where: {
+        jobNo: req.params.jobNo
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+  });
+
   app.post("/api/jobs", function(req, res) {
     db.Job.create(req.body).then(function(data) {
       res.json(data);
